@@ -2,6 +2,10 @@ import NextAuth, { Account, Session, User } from "next-auth";
 import type { NextAuthOptions as NextAuthConfig } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import { env } from "@/env.mjs";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "../../../../../prisma/generated/prisma-client-js";
+
+const prisma = new PrismaClient();
 
 declare module "next-auth/jwt" {
   interface JWT {
@@ -11,6 +15,7 @@ declare module "next-auth/jwt" {
 }
 
 export const authOptions = {
+  adapter: PrismaAdapter(prisma),
   // Configure one or more authentication providers
   providers: [
     GithubProvider({

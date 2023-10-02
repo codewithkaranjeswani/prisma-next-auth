@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import ThemeSwitcher from "./Themeswitcher";
 import { signOut, useSession } from "next-auth/react";
@@ -8,6 +8,12 @@ function Navbar() {
   const { data: session, status } = useSession();
   const [navbar, setNavbar] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // useEffect only runs on the client, so now we can safely show the UI
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <header className="container mx-auto border-b px-4 sm:px-6">
@@ -69,7 +75,7 @@ function Navbar() {
               </Link>
             </div>
           )}
-          <ThemeSwitcher />
+          <ThemeSwitcher mounted={mounted} />
         </div>
       </div>
     </header>

@@ -8,6 +8,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(["test", "development", "production"]),
     GITHUB_ID: z.string().min(1),
     GITHUB_SECRET: z.string().min(1),
+    DATABASE_URL: z.string().min(1),
   },
   // client: {
   //   NEXT_PUBLIC_API_URL: z.string().min(1),
@@ -20,6 +21,7 @@ export const env = createEnv({
   //   GITHUB_ID: process.env.GITHUB_ID,
   //   GITHUB_SECRET: process.env.GITHUB_SECRET,
   //   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  //   DATABASE_URL: z.string().min(1),
   // },
   // For Next.js >= 13.4.4, you only need to destructure client variables:
   // experimental__runtimeEnv: {
